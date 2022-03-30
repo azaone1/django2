@@ -1,0 +1,69 @@
+{% extends 'index.html' %}
+{% load static from static %}
+
+{% block content %}
+<div class="container ">
+    <div class="columns is-centered">
+        {% for article in articles %}
+        <div class="column  is-3">
+            <a href="{% url 'blog:article_detail' article.slug %}">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="media-content">
+                            <p class="title has-text-centered has-text-black is-4">
+                                {{article}}
+                            </p>
+                            {% if user == article.author %}
+                                <p class="subtitle is-6 has-text-centered has-text-grey">by you</p>
+                            {% else %}
+                                <p class="subtitle is-6 has-text-centered has-text-grey">by {{article.author}}</p>
+                            {% endif %}
+                            <div class="title has-text-centered has-text-grey is-6">
+                                {{article.snippet}}
+                            </div>
+                            <div class="title has-text-centered has-text-grey is-6">
+                                {{article.date}}
+                            </div>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <div class="columns is-gapless">
+                                        <div class="column">
+                                            <ion-icon class="mt-1" name="thumbS-up-outline"></ion-icon>
+                                        </div>
+                                        <div class="column">
+                                            <span class="ml-2">{{article.total_likes}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-2">
+                                    <div class="columns is-gapless">
+                                        <div class="column">
+                                            <ion-icon class="mt-1" name="thumbS-down-outline"></ion-icon>
+                                        </div>
+                                        <div class="column">
+                                            <span class="ml-2">{{article.total_dislikes}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-2">
+                                    <div class="columns is-gapless">
+                                        <div class="column">
+                                            <ion-icon class="mt-1" name="thumbs-down-outline"></ion-icon>
+                                        </div>
+                                        <div class="column">
+                                            <span class="ml-2">{{article.comment_set.count}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+

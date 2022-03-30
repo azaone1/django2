@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+
+{% block content  %}
+<form action="{% url 'blog:article_create' %}" class="site-form has-background-light" method="post"
+      enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <div class="has-text-centered my-2">
+        <button class="button is-success" type="submit">Отправить</button>
+        <a href="{% url 'blog:home' %}" class="button is-danger">
+            Отмена
+        </a>
+    </div>
+</form>
+{% endblock  %}
